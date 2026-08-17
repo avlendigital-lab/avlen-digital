@@ -50,6 +50,8 @@ The `public/_redirects` file is included so the site stays stable if page routes
 - Contact information: `src/data/contact.ts`
 - Turkish and English text: `src/data/translations.ts`
 - Portfolio concept projects: `src/data/translations.ts`, inside `work.projects`
+- Demo template websites: `src/data/demoTemplates.ts`
+- Demo template page layout: `src/pages/TemplateDemo.tsx`
 - Main page sections: `src/sections/`
 - Shared components: `src/components/`
 - Site styling and responsive behavior: `src/styles/global.css`
