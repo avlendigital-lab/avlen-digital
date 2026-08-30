@@ -2,6 +2,8 @@
 
 Official first-version website for AVLEN Digital, built with React, Vite, TypeScript and hand-written CSS.
 
+The site includes a polished agency homepage plus six visual concept template demos for small-business categories.
+
 ## Run Locally
 
 Install packages once:
@@ -49,7 +51,7 @@ The `public/_redirects` file is included so the site stays stable if page routes
 
 - Contact information: `src/data/contact.ts`
 - Turkish and English text: `src/data/translations.ts`
-- Portfolio concept projects: `src/data/translations.ts`, inside `work.projects`
+- Portfolio concept projects and moving showcase copy: `src/data/translations.ts`, inside `work`
 - Demo template websites: `src/data/demoTemplates.ts`
 - Demo template page layout: `src/pages/TemplateDemo.tsx`
 - Main page sections: `src/sections/`
@@ -62,10 +64,13 @@ The site uses `public/avlen-mark.png` for the hero composition, about section, f
 
 ## Demo Visuals
 
-The portfolio concept demos use 12 project images: one hero/atmosphere image and three service/menu images for each demo category.
+The portfolio concept demos use 32 project images across hero, service, menu, product and gallery areas.
 
 - Barber: `public/demo-barber.png`, `public/demo-barber-cut.png`, `public/demo-barber-towel.png`, `public/demo-barber-beard.png`
 - Detailing: `public/demo-detailing.png`, `public/demo-detailing-correction.png`, `public/demo-detailing-ceramic.png`, `public/demo-detailing-interior.png`
-- Cafe: `public/demo-cafe.png`, `public/demo-cafe-latte.png`, `public/demo-cafe-filter.png`, `public/demo-cafe-plate.png`
+- Cafe: `public/demo-cafe.png`, `public/demo-cafe-latte.png`, `public/demo-cafe-filter.png`, `public/demo-cafe-plate.png`, `public/demo-cafe-espresso.png`, `public/demo-cafe-iced.png`, `public/demo-cafe-croissant.png`, `public/demo-cafe-cake.png`
+- Restaurant: `public/demo-restaurant.png`, `public/demo-restaurant-dish.png`, `public/demo-restaurant-chef.png`, `public/demo-restaurant-table.png`, `public/demo-restaurant-pasta.png`, `public/demo-restaurant-appetizer.png`, `public/demo-restaurant-dessert.png`, `public/demo-restaurant-cocktail.png`
+- Stationery: `public/demo-stationery.png`, `public/demo-stationery-notebook.png`, `public/demo-stationery-wrap.png`, `public/demo-stationery-display.png`
+- Hair salon: `public/demo-hair-salon.png`, `public/demo-hair-salon-color.png`, `public/demo-hair-salon-styling.png`, `public/demo-hair-salon-products.png`
 
-They are referenced from `src/data/demoTemplates.ts` and appear in the selected work cards, service sections, package/menu cards and gallery areas.
+They are referenced from `src/data/demoTemplates.ts` and appear in the selected work cards, moving template rail, service sections, package/menu/product cards and gallery areas.

@@ -37,9 +37,13 @@ export const translations = {
     work: {
       eyebrow: 'Seçili İşler',
       title: 'İlk konsept portfolyo',
-      body: 'Gerçek müşteri işleri eklendikçe bu alan güncellenecek. Şimdilik AVLEN’in görsel yaklaşımını gösteren üç konsept çalışma.',
+      body: 'Gerçek müşteri işleri eklendikçe bu alan güncellenecek. Şimdilik AVLEN’in görsel yaklaşımını farklı işletme tiplerinde gösteren altı konsept çalışma.',
       demoCta: 'Demo siteyi incele',
       scopeLabel: 'Odak',
+      railEyebrow: 'Template vitrini',
+      railTitle: 'Farklı sektörler için daha görsel, daha hızlı anlaşılır sayfalar.',
+      railBody:
+        'Kayan vitrin, ziyaretçiye tek tek okumadan AVLEN’in neler tasarlayabileceğini gösterir: mekanlar, ürünler, hizmetler ve rezervasyon akışları.',
       projects: [
         {
           number: '01',
@@ -64,6 +68,30 @@ export const translations = {
           label: 'Konsept Proje',
           note: 'Mahalle hissini modern tipografi ve sıcak bir ritimle taşıyan yapı.',
           scope: ['Menü vitrini', 'Mekan atmosferi', 'Günlük ziyaret çağrısı'],
+        },
+        {
+          number: '04',
+          type: 'Restaurant',
+          title: 'Modern Restaurant Story',
+          label: 'Konsept Proje',
+          note: 'Menü, ambiyans ve rezervasyon kararını iştah açan görsellerle birleştiren restoran vitrini.',
+          scope: ['Rezervasyon akışı', 'Menü hikayesi', 'Atmosfer odaklı görseller'],
+        },
+        {
+          number: '05',
+          type: 'Stationery',
+          title: 'Curated Product Shop',
+          label: 'Konsept Proje',
+          note: 'Kırtasiye ve butik ürün mağazaları için doku, ürün seçkisi ve hediye akışını öne çıkaran yapı.',
+          scope: ['Ürün vitrini', 'Hediye setleri', 'Butik mağaza hissi'],
+        },
+        {
+          number: '06',
+          type: 'Hair Salon',
+          title: 'Soft Hair Studio',
+          label: 'Konsept Proje',
+          note: 'Kadın kuaförleri için renk, bakım ve randevu kararını sıcak görsellerle güçlendiren salon vitrini.',
+          scope: ['Renk hizmetleri', 'Bakım hikayesi', 'Randevu odaklı akış'],
         },
       ],
     },
@@ -170,9 +198,13 @@ export const translations = {
     work: {
       eyebrow: 'Selected Work',
       title: 'First concept portfolio',
-      body: 'This area will evolve as real client work is added. For now, three concept studies show the visual direction AVLEN can bring to different businesses.',
+      body: 'This area will evolve as real client work is added. For now, six concept studies show the visual direction AVLEN can bring to different business types.',
       demoCta: 'View demo site',
       scopeLabel: 'Focus',
+      railEyebrow: 'Template showcase',
+      railTitle: 'More visual, faster-to-understand pages for different industries.',
+      railBody:
+        'The moving showcase lets visitors understand what AVLEN can design before reading every detail: places, products, services and booking flows.',
       projects: [
         {
           number: '01',
@@ -197,6 +229,30 @@ export const translations = {
           label: 'Concept Project',
           note: 'A neighborhood feeling carried through modern type and a warm rhythm.',
           scope: ['Menu showcase', 'Place atmosphere', 'Daily visit prompt'],
+        },
+        {
+          number: '04',
+          type: 'Restaurant',
+          title: 'Modern Restaurant Story',
+          label: 'Concept Project',
+          note: 'A restaurant showcase that connects menu, atmosphere and reservation decisions through appetite-led imagery.',
+          scope: ['Booking flow', 'Menu storytelling', 'Atmosphere-led imagery'],
+        },
+        {
+          number: '05',
+          type: 'Stationery',
+          title: 'Curated Product Shop',
+          label: 'Concept Project',
+          note: 'A tactile structure for stationery and boutique product shops, built around product edits and gifting.',
+          scope: ['Product showcase', 'Gift sets', 'Boutique retail feel'],
+        },
+        {
+          number: '06',
+          type: 'Hair Salon',
+          title: 'Soft Hair Studio',
+          label: 'Concept Project',
+          note: 'A salon showcase for women’s hair studios, built around color, care and warm booking-led imagery.',
+          scope: ['Color services', 'Care story', 'Booking-led flow'],
         },
       ],
     },

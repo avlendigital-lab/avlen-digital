@@ -12,7 +12,10 @@ type TemplateDemoProps = {
 export function TemplateDemo({ language, setLanguage, template }: TemplateDemoProps) {
   const c = template.content[language];
   const isTurkish = language === 'tr';
-  const navTargets = ['#demo-services', '#demo-process', '#demo-offers'];
+  const hasMenu = Boolean(c.menuItems?.length && template.visuals.menu?.length);
+  const navTargets = hasMenu ? ['#demo-menu', '#demo-gallery', '#demo-offers'] : ['#demo-services', '#demo-process', '#demo-offers'];
+  const primaryTarget = hasMenu ? '#demo-menu' : '#demo-offers';
+  const secondaryTarget = hasMenu ? '#demo-gallery' : '#demo-services';
   const mainVisual = template.visuals.gallery[0] ?? template.visuals.services[0];
 
   useEffect(() => {
@@ -62,6 +65,17 @@ export function TemplateDemo({ language, setLanguage, template }: TemplateDemoPr
             </div>
           </nav>
 
+          <img className="demo-hero-bg-image" src={template.image.src} alt="" aria-hidden="true" />
+
+          <div className="demo-quick-info" aria-label={isTurkish ? 'Hızlı işletme bilgileri' : 'Quick business information'}>
+            {c.quickInfo.map((item) => (
+              <p key={`${item.label}-${item.value}`}>
+                <span>{item.label}</span>
+                <strong>{item.value}</strong>
+              </p>
+            ))}
+          </div>
+
           <div className="demo-hero-grid">
             <div className="demo-hero-copy" data-reveal>
               <p>{c.badge}</p>
@@ -72,8 +86,8 @@ export function TemplateDemo({ language, setLanguage, template }: TemplateDemoPr
               </h1>
               <p>{c.subhead}</p>
               <div className="demo-actions">
-                <a href="#demo-offers">{c.primaryCta}</a>
-                <a href="#demo-services">{c.secondaryCta}</a>
+                <a href={primaryTarget}>{c.primaryCta}</a>
+                <a href={secondaryTarget}>{c.secondaryCta}</a>
               </div>
               <p className="demo-concept-note">{c.conceptNote}</p>
             </div>
@@ -120,6 +134,33 @@ export function TemplateDemo({ language, setLanguage, template }: TemplateDemoPr
           </div>
         </section>
 
+        {hasMenu && c.menuTitle && c.menuBody && c.menuItems && template.visuals.menu ? (
+          <section className="demo-menu-board" id="demo-menu" aria-labelledby="demo-menu-title">
+            <div className="demo-menu-board__heading" data-reveal>
+              <p className="demo-kicker">{isTurkish ? 'Fotoğraflı menü' : 'Visual menu'}</p>
+              <h2 id="demo-menu-title">{c.menuTitle}</h2>
+              <p>{c.menuBody}</p>
+            </div>
+
+            <div className="demo-menu-grid">
+              {c.menuItems.map((item) => {
+                const visual = template.visuals.menu?.[item.visualIndex % template.visuals.menu.length];
+
+                return (
+                  <article key={item.name} data-reveal>
+                    {visual ? <img src={visual.src} alt={visual.alt[language]} loading="lazy" /> : null}
+                    <div>
+                      <span>{item.price}</span>
+                      <h3>{item.name}</h3>
+                      <p>{item.detail}</p>
+                    </div>
+                  </article>
+                );
+              })}
+            </div>
+          </section>
+        ) : null}
+
         <section className="demo-services" id="demo-services" aria-labelledby="demo-services-title">
           <div data-reveal>
             <p className="demo-kicker">{isTurkish ? 'Site bölümü' : 'Site section'}</p>
@@ -157,7 +198,7 @@ export function TemplateDemo({ language, setLanguage, template }: TemplateDemoPr
           </div>
         </section>
 
-        <section className="demo-gallery" aria-labelledby="demo-gallery-title">
+        <section className="demo-gallery" id="demo-gallery" aria-labelledby="demo-gallery-title">
           <div data-reveal>
             <p className="demo-kicker">{isTurkish ? 'Atmosfer' : 'Atmosphere'}</p>
             <h2 id="demo-gallery-title">{c.galleryTitle}</h2>

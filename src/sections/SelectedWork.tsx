@@ -1,13 +1,29 @@
 import { demoTemplates } from '../data/demoTemplates';
+import type { DemoTemplate } from '../data/demoTemplates';
 import type { Translation } from '../data/translations';
 
 type SelectedWorkProps = {
   t: Translation;
 };
 
-const visualClasses = ['project-visual--barber', 'project-visual--detailing', 'project-visual--cafe'] as const;
+type WorkProject = Translation['work']['projects'][number];
+type WorkItem = {
+  project: WorkProject;
+  template: DemoTemplate;
+};
+
+function hasTemplate(item: { project: WorkProject; template?: DemoTemplate }): item is WorkItem {
+  return Boolean(item.template);
+}
 
 export function SelectedWork({ t }: SelectedWorkProps) {
+  const workItems = t.work.projects
+    .map((project, index) => ({
+      project,
+      template: demoTemplates[index],
+    }))
+    .filter(hasTemplate);
+
   return (
     <section className="work-section section-pad" id="work" aria-labelledby="work-title">
       <div className="section-inner">
@@ -18,12 +34,10 @@ export function SelectedWork({ t }: SelectedWorkProps) {
         </div>
 
         <div className="project-list">
-          {t.work.projects.map((project, index) => {
-            const template = demoTemplates[index];
-
+          {workItems.map(({ project, template }) => {
             return (
               <a className="project-card" href={template.path} key={project.number} data-reveal>
-                <div className={`project-visual ${visualClasses[index]}`}>
+                <div className={`project-visual project-visual--${template.slug}`}>
                   <img className="project-visual-photo" src={template.image.src} alt="" loading="lazy" />
                   <div className="browser-frame">
                     <span />
@@ -61,7 +75,54 @@ export function SelectedWork({ t }: SelectedWorkProps) {
             );
           })}
         </div>
+
+        <TemplateRail t={t} />
       </div>
     </section>
+  );
+}
+
+function TemplateRail({ t }: SelectedWorkProps) {
+  const railItems = t.work.projects
+    .map((project, index) => ({
+      project,
+      template: demoTemplates[index],
+    }))
+    .filter(hasTemplate);
+  const duplicatedItems = [...railItems, ...railItems];
+
+  return (
+    <div className="template-rail" aria-labelledby="template-rail-title">
+      <div className="template-rail__intro">
+        <p className="eyebrow">{t.work.railEyebrow}</p>
+        <h3 id="template-rail-title">{t.work.railTitle}</h3>
+        <p>{t.work.railBody}</p>
+      </div>
+
+      <div className="template-rail__viewport">
+        <div className="template-rail__track">
+          {duplicatedItems.map(({ project, template }, index) => {
+            const isDuplicate = index >= railItems.length;
+
+            return (
+              <a
+                aria-hidden={isDuplicate ? 'true' : undefined}
+                className={`template-rail-card template-rail-card--${template.slug}`}
+                href={template.path}
+                key={`${project.number}-${index}`}
+                tabIndex={isDuplicate ? -1 : undefined}
+              >
+                <img src={template.image.src} alt="" loading="lazy" />
+                <span>{project.number}</span>
+                <div>
+                  <p>{project.type}</p>
+                  <h4>{project.title}</h4>
+                </div>
+              </a>
+            );
+          })}
+        </div>
+      </div>
+    </div>
   );
 }
