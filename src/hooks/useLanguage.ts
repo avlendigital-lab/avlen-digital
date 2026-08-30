@@ -20,11 +20,14 @@ export function useLanguage() {
   useEffect(() => {
     window.localStorage.setItem(STORAGE_KEY, language);
     document.documentElement.lang = language;
-    document.title = translations[language].meta.title;
 
-    const description = document.querySelector<HTMLMetaElement>('meta[name="description"]');
-    if (description) {
-      description.content = translations[language].meta.description;
+    if (!window.location.pathname.startsWith('/templates/')) {
+      document.title = translations[language].meta.title;
+
+      const description = document.querySelector<HTMLMetaElement>('meta[name="description"]');
+      if (description) {
+        description.content = translations[language].meta.description;
+      }
     }
   }, [language]);
 
