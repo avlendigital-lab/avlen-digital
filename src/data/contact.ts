@@ -1,5 +1,5 @@
 export const CONTACT = {
-  email: 'hello@avlendigital.com',
+  email: 'avlendigital@gmail.com',
   instagramHandle: '@avlendigital',
   instagramUrl: 'https://www.instagram.com/avlendigital',
 } as const;
