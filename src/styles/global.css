@@ -626,6 +626,7 @@ button {
   content: '';
   position: absolute;
   inset: 0;
+  z-index: 1;
   background:
     linear-gradient(90deg, rgba(241, 232, 213, 0.07) 1px, transparent 1px),
     linear-gradient(rgba(241, 232, 213, 0.07) 1px, transparent 1px);
@@ -633,11 +634,37 @@ button {
   opacity: 0.5;
 }
 
+.project-visual::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(90deg, rgba(17, 23, 25, 0.72), rgba(17, 23, 25, 0.18)),
+    linear-gradient(0deg, rgba(17, 23, 25, 0.64), rgba(17, 23, 25, 0));
+  pointer-events: none;
+}
+
+.project-visual-photo {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.54;
+  filter: saturate(0.86) contrast(1.06);
+  transform: scale(1.02);
+  transition:
+    opacity 260ms ease,
+    transform 360ms ease;
+}
+
 .project-visual p {
   position: absolute;
   right: 28px;
   bottom: 22px;
-  z-index: 2;
+  z-index: 4;
   margin: 0;
   color: var(--cream);
   font-size: 3.2rem;
@@ -651,7 +678,7 @@ button {
 
 .browser-frame {
   position: absolute;
-  z-index: 2;
+  z-index: 4;
   top: 42px;
   left: 34px;
   display: flex;
@@ -661,7 +688,8 @@ button {
   padding: 14px;
   border: 1px solid rgba(241, 232, 213, 0.5);
   border-radius: 8px;
-  background: rgba(241, 232, 213, 0.07);
+  background: rgba(17, 23, 25, 0.24);
+  backdrop-filter: blur(10px);
   transition: transform 260ms ease;
 }
 
@@ -688,7 +716,7 @@ button {
 .visual-line,
 .visual-block {
   position: absolute;
-  z-index: 1;
+  z-index: 3;
   transition: transform 260ms ease;
 }
 
@@ -868,6 +896,11 @@ button {
 .project-card:hover {
   border-color: rgba(201, 109, 67, 0.52);
   transform: translateY(-2px);
+}
+
+.project-card:hover .project-visual-photo {
+  opacity: 0.68;
+  transform: scale(1.06);
 }
 
 .project-card:hover .browser-frame,
@@ -1402,6 +1435,7 @@ button {
 
 .demo-visual {
   position: relative;
+  margin: 0;
   min-height: 560px;
   overflow: hidden;
   border: 1px solid var(--demo-line);
@@ -1413,6 +1447,42 @@ button {
   isolation: isolate;
 }
 
+.demo-visual::before,
+.demo-visual::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.demo-visual::before {
+  z-index: 1;
+  background:
+    linear-gradient(90deg, color-mix(in srgb, var(--demo-bg) 78%, transparent), transparent 58%),
+    linear-gradient(0deg, color-mix(in srgb, var(--demo-bg) 74%, transparent), transparent 46%);
+}
+
+.demo-visual::after {
+  z-index: 2;
+  background:
+    linear-gradient(90deg, var(--demo-grid) 1px, transparent 1px),
+    linear-gradient(var(--demo-grid) 1px, transparent 1px);
+  background-size: 44px 44px;
+  opacity: 0.68;
+}
+
+.demo-visual-image {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.72;
+  filter: saturate(0.9) contrast(1.05);
+  transform: scale(1.02);
+}
+
 .template-demo--cafe .demo-visual {
   box-shadow: none;
 }
@@ -1421,7 +1491,7 @@ button {
   position: absolute;
   top: 54px;
   left: 42px;
-  z-index: 3;
+  z-index: 4;
   display: flex;
   gap: 8px;
   width: 58%;
@@ -1429,7 +1499,8 @@ button {
   padding: 16px;
   border: 1px solid var(--demo-line);
   border-radius: 8px;
-  background: color-mix(in srgb, var(--demo-bg) 76%, transparent);
+  background: color-mix(in srgb, var(--demo-bg) 66%, transparent);
+  backdrop-filter: blur(14px);
 }
 
 .demo-device span {
@@ -1454,6 +1525,7 @@ button {
 .demo-orbit,
 .demo-shape {
   position: absolute;
+  z-index: 3;
   pointer-events: none;
 }
 
@@ -1531,7 +1603,49 @@ button {
   transform: rotate(8deg);
 }
 
-.demo-visual strong {
+.demo-phone-card {
+  position: absolute;
+  right: 38px;
+  top: 52px;
+  z-index: 5;
+  display: grid;
+  gap: 10px;
+  width: min(220px, 44%);
+  padding: 18px;
+  border: 1px solid var(--demo-line);
+  border-radius: 7px;
+  background: color-mix(in srgb, var(--demo-bg) 72%, transparent);
+  backdrop-filter: blur(16px);
+}
+
+.demo-phone-card span,
+.demo-phone-card p,
+.demo-phone-card strong {
+  margin: 0;
+}
+
+.demo-phone-card span {
+  color: var(--demo-accent);
+  font-size: 0.66rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.demo-phone-card strong {
+  color: var(--demo-ink);
+  font-size: 1.2rem;
+  line-height: 1.05;
+}
+
+.demo-phone-card p {
+  padding-top: 10px;
+  border-top: 1px solid var(--demo-line);
+  color: var(--demo-muted);
+  font-size: 0.82rem;
+  line-height: 1.25;
+}
+
+.demo-visual-title {
   position: absolute;
   right: 34px;
   bottom: 30px;
@@ -1543,6 +1657,32 @@ button {
   line-height: 0.92;
   letter-spacing: 0;
   text-align: right;
+  text-transform: uppercase;
+}
+
+.demo-visual-caption {
+  position: absolute;
+  left: 28px;
+  bottom: 28px;
+  z-index: 5;
+  max-width: 300px;
+  margin: 0;
+  padding: 16px;
+  border: 1px solid var(--demo-line);
+  border-radius: 7px;
+  background: color-mix(in srgb, var(--demo-bg) 74%, transparent);
+  color: var(--demo-muted);
+  font-size: 0.86rem;
+  line-height: 1.45;
+  backdrop-filter: blur(16px);
+}
+
+.demo-visual-caption span {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--demo-accent);
+  font-size: 0.66rem;
+  font-weight: 900;
   text-transform: uppercase;
 }
 
@@ -1641,17 +1781,31 @@ button {
   gap: 16px;
 }
 
-.demo-service-list article,
-.demo-offer-list article {
+.demo-service-list article {
   display: grid;
-  gap: 14px;
-  padding: 26px 0;
-  border-top: 1px solid var(--demo-line);
+  grid-template-columns: minmax(180px, 0.38fr) minmax(0, 1fr);
+  gap: 22px;
+  align-items: end;
+  overflow: hidden;
+  padding: 14px;
+  border: 1px solid var(--demo-line);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--demo-panel) 82%, transparent);
 }
 
-.demo-service-list article:last-child,
-.demo-offer-list article:last-child {
-  border-bottom: 1px solid var(--demo-line);
+.demo-service-list img {
+  width: 100%;
+  height: 100%;
+  min-height: 180px;
+  object-fit: cover;
+  border-radius: 6px;
+  filter: saturate(0.9) contrast(1.04);
+}
+
+.demo-service-list article > div {
+  display: grid;
+  gap: 12px;
+  padding: 8px 8px 10px 0;
 }
 
 .demo-service-list span {
@@ -1661,7 +1815,6 @@ button {
 }
 
 .demo-service-list h3,
-.demo-offer-list h3,
 .demo-process-list h3 {
   margin: 0;
   font-size: 2rem;
@@ -1669,6 +1822,42 @@ button {
   letter-spacing: 0;
 }
 
+.demo-offer-list {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.demo-offer-list article {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  overflow: hidden;
+  border: 1px solid var(--demo-line);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--demo-panel) 88%, transparent);
+}
+
+.demo-offer-list img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  filter: saturate(0.9) contrast(1.05);
+}
+
+.demo-offer-list article > div {
+  display: grid;
+  gap: 12px;
+  align-content: start;
+  padding: 20px;
+}
+
+.demo-offer-list h3 {
+  margin: 0;
+  font-size: 1.45rem;
+  font-weight: 650;
+  line-height: 1.03;
+  letter-spacing: 0;
+}
+
+.demo-service-list p,
 .demo-offer-list p,
 .demo-process-list p,
 .demo-editorial p,
@@ -1700,14 +1889,51 @@ button {
   background:
     linear-gradient(150deg, color-mix(in srgb, var(--demo-accent) 22%, transparent), transparent 48%),
     var(--demo-panel);
+  isolation: isolate;
+}
+
+.demo-gallery-grid article img {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.48;
+  filter: saturate(0.88) contrast(1.08);
+  transition:
+    opacity 240ms ease,
+    transform 360ms ease;
+}
+
+.demo-gallery-grid article:nth-child(2) img {
+  object-position: 68% 48%;
+}
+
+.demo-gallery-grid article:nth-child(3) img {
+  object-position: 38% 62%;
+}
+
+.demo-gallery-grid article:nth-child(4) img {
+  object-position: 82% 54%;
+}
+
+.demo-gallery-grid article:hover img {
+  opacity: 0.62;
+  transform: scale(1.05);
 }
 
 .demo-gallery-grid article::before,
 .demo-gallery-grid article::after {
   content: '';
   position: absolute;
+  z-index: 1;
   border: 1px solid var(--demo-line);
   border-radius: 50%;
+}
+
+.demo-gallery-grid article::after {
+  background: color-mix(in srgb, var(--demo-bg) 16%, transparent);
 }
 
 .demo-gallery-grid article::before {
@@ -1728,7 +1954,7 @@ button {
 .demo-gallery-grid span,
 .demo-gallery-grid p {
   position: relative;
-  z-index: 2;
+  z-index: 3;
 }
 
 .demo-gallery-grid span,
@@ -1766,24 +1992,47 @@ button {
   border: 1px solid var(--demo-line);
   border-radius: 8px;
   background: var(--demo-panel);
+  isolation: isolate;
 }
 
-.demo-editorial-art span {
+.demo-editorial-art img {
   position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.58;
+  filter: saturate(0.88) contrast(1.06);
+}
+
+.demo-editorial-art::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(90deg, color-mix(in srgb, var(--demo-bg) 76%, transparent), transparent),
+    linear-gradient(0deg, color-mix(in srgb, var(--demo-bg) 72%, transparent), transparent 48%);
+}
+
+.demo-editorial-ring {
+  position: absolute;
+  z-index: 2;
   border: 1px solid var(--demo-line);
   border-radius: 48% 52% 42% 58% / 60% 40% 60% 40%;
 }
 
-.demo-editorial-art span:nth-child(1) {
+.demo-editorial-ring--one {
   inset: 42px;
 }
 
-.demo-editorial-art span:nth-child(2) {
+.demo-editorial-ring--two {
   inset: 86px;
   transform: rotate(13deg);
 }
 
-.demo-editorial-art span:nth-child(3) {
+.demo-editorial-ring--three {
   inset: 130px;
   transform: rotate(-12deg);
 }
@@ -1927,10 +2176,15 @@ button {
 
   .demo-hero-copy h1 {
     font-size: 4.35rem;
+    line-height: 0.96;
   }
 
   .demo-visual {
     min-height: 500px;
+  }
+
+  .demo-offer-list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .demo-final a {
@@ -2189,7 +2443,7 @@ button {
 
   .demo-hero-copy h1 {
     font-size: 3rem;
-    line-height: 0.94;
+    line-height: 1;
   }
 
   .demo-hero-copy > p:nth-of-type(2) {
@@ -2202,14 +2456,25 @@ button {
   }
 
   .demo-visual {
-    min-height: 390px;
+    min-height: 430px;
   }
 
   .demo-device {
-    top: 30px;
-    left: 24px;
-    width: 68%;
-    height: 58%;
+    top: 92px;
+    left: 18px;
+    width: 58%;
+    height: 38%;
+  }
+
+  .demo-phone-card {
+    top: 92px;
+    right: 18px;
+    width: 36%;
+    padding: 14px;
+  }
+
+  .demo-phone-card p:last-child {
+    display: none;
   }
 
   .demo-shape--one {
@@ -2226,11 +2491,19 @@ button {
     height: 92px;
   }
 
-  .demo-visual strong {
+  .demo-visual-title {
     right: 20px;
-    bottom: 20px;
-    max-width: 240px;
-    font-size: 2rem;
+    top: 22px;
+    bottom: auto;
+    max-width: 220px;
+    font-size: 1.9rem;
+  }
+
+  .demo-visual-caption {
+    right: 18px;
+    left: 18px;
+    bottom: 18px;
+    max-width: none;
   }
 
   .demo-signal {
@@ -2268,12 +2541,41 @@ button {
   .demo-process h2,
   .demo-final h2 {
     font-size: 2.55rem;
+    line-height: 1.04;
   }
 
   .demo-service-list h3,
   .demo-offer-list h3,
   .demo-process-list h3 {
     font-size: 1.55rem;
+    line-height: 1.08;
+  }
+
+  .demo-service-list article {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 12px;
+  }
+
+  .demo-service-list img {
+    min-height: 0;
+    aspect-ratio: 16 / 10;
+  }
+
+  .demo-service-list article > div {
+    padding: 4px 4px 8px;
+  }
+
+  .demo-offer-list {
+    grid-template-columns: 1fr;
+  }
+
+  .demo-offer-list img {
+    aspect-ratio: 16 / 9;
+  }
+
+  .demo-offer-list article > div {
+    padding: 18px;
   }
 
   .demo-gallery-grid {
@@ -2281,7 +2583,7 @@ button {
   }
 
   .demo-gallery-grid article {
-    min-height: 170px;
+    min-height: 210px;
   }
 
   .demo-gallery-grid p {
@@ -2325,6 +2627,29 @@ button {
 
   .demo-hero-copy h1 {
     font-size: 2.45rem;
+    line-height: 1.04;
+  }
+
+  .demo-visual {
+    min-height: 460px;
+  }
+
+  .demo-device {
+    display: none;
+  }
+
+  .demo-phone-card {
+    top: 100px;
+    right: 16px;
+    left: 16px;
+    width: auto;
+  }
+
+  .demo-visual-title {
+    right: 16px;
+    left: 16px;
+    max-width: none;
+    text-align: left;
   }
 
   .demo-services h2,
@@ -2334,6 +2659,16 @@ button {
   .demo-process h2,
   .demo-final h2 {
     font-size: 2.18rem;
+    line-height: 1.06;
+  }
+
+  .demo-actions a,
+  .demo-final a {
+    min-width: 0;
+    width: 100%;
+    padding-inline: 14px;
+    white-space: normal;
+    text-align: center;
   }
 }
 
