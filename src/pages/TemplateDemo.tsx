@@ -13,6 +13,7 @@ export function TemplateDemo({ language, setLanguage, template }: TemplateDemoPr
   const c = template.content[language];
   const isTurkish = language === 'tr';
   const navTargets = ['#demo-services', '#demo-process', '#demo-offers'];
+  const mainVisual = template.visuals.gallery[0] ?? template.visuals.services[0];
 
   useEffect(() => {
     document.title = `${c.businessName} — AVLEN Concept Demo`;
@@ -77,19 +78,30 @@ export function TemplateDemo({ language, setLanguage, template }: TemplateDemoPr
               <p className="demo-concept-note">{c.conceptNote}</p>
             </div>
 
-            <div className="demo-visual" aria-hidden="true" data-reveal>
-              <div className="demo-device">
+            <figure className="demo-visual" data-reveal>
+              <img className="demo-visual-image" src={template.image.src} alt={c.imageAlt} />
+              <div className="demo-device" aria-hidden="true">
                 <span />
                 <span />
                 <span />
                 <div />
               </div>
-              <div className="demo-orbit demo-orbit--one" />
-              <div className="demo-orbit demo-orbit--two" />
-              <div className="demo-shape demo-shape--one" />
-              <div className="demo-shape demo-shape--two" />
-              <strong>{c.businessName}</strong>
-            </div>
+              <div className="demo-phone-card" aria-hidden="true">
+                <span>{isTurkish ? 'Hızlı aksiyon' : 'Quick action'}</span>
+                <strong>{c.primaryCta}</strong>
+                <p>{c.services[0]}</p>
+                <p>{c.services[1]}</p>
+              </div>
+              <div className="demo-orbit demo-orbit--one" aria-hidden="true" />
+              <div className="demo-orbit demo-orbit--two" aria-hidden="true" />
+              <div className="demo-shape demo-shape--one" aria-hidden="true" />
+              <div className="demo-shape demo-shape--two" aria-hidden="true" />
+              <strong className="demo-visual-title">{c.businessName}</strong>
+              <figcaption className="demo-visual-caption">
+                <span>{isTurkish ? 'Atmosfer karesi' : 'Atmosphere frame'}</span>
+                {c.imageCaption}
+              </figcaption>
+            </figure>
           </div>
         </section>
 
@@ -114,20 +126,29 @@ export function TemplateDemo({ language, setLanguage, template }: TemplateDemoPr
             <h2 id="demo-services-title">{c.servicesTitle}</h2>
           </div>
           <div className="demo-service-list">
-            {c.services.map((service, index) => (
-              <article key={service} data-reveal>
-                <span>0{index + 1}</span>
-                <h3>{service}</h3>
-              </article>
-            ))}
+            {c.services.map((service, index) => {
+              const visual = template.visuals.services[index % template.visuals.services.length];
+
+              return (
+                <article key={service} data-reveal>
+                  <img src={visual.src} alt={visual.alt[language]} loading="lazy" />
+                  <div>
+                    <span>0{index + 1}</span>
+                    <h3>{service}</h3>
+                    <p>{c.serviceDetails[index]}</p>
+                  </div>
+                </article>
+              );
+            })}
           </div>
         </section>
 
         <section className="demo-editorial">
           <div className="demo-editorial-art" aria-hidden="true" data-reveal>
-            <span />
-            <span />
-            <span />
+            <img src={mainVisual.src} alt="" loading="lazy" />
+            <span className="demo-editorial-ring demo-editorial-ring--one" />
+            <span className="demo-editorial-ring demo-editorial-ring--two" />
+            <span className="demo-editorial-ring demo-editorial-ring--three" />
           </div>
           <div data-reveal>
             <p className="demo-kicker">{isTurkish ? 'Tasarım yaklaşımı' : 'Design approach'}</p>
@@ -142,12 +163,17 @@ export function TemplateDemo({ language, setLanguage, template }: TemplateDemoPr
             <h2 id="demo-gallery-title">{c.galleryTitle}</h2>
           </div>
           <div className="demo-gallery-grid">
-            {c.gallery.map((item, index) => (
-              <article key={item} data-reveal>
-                <span>0{index + 1}</span>
-                <p>{item}</p>
-              </article>
-            ))}
+            {c.gallery.map((item, index) => {
+              const visual = template.visuals.gallery[index % template.visuals.gallery.length];
+
+              return (
+                <article key={item} data-reveal>
+                  <img src={visual.src} alt={visual.alt[language]} loading="lazy" />
+                  <span>0{index + 1}</span>
+                  <p>{item}</p>
+                </article>
+              );
+            })}
           </div>
         </section>
 
@@ -157,12 +183,19 @@ export function TemplateDemo({ language, setLanguage, template }: TemplateDemoPr
             <h2 id="demo-offers-title">{c.offersTitle}</h2>
           </div>
           <div className="demo-offer-list">
-            {c.offers.map((offer) => (
-              <article key={offer.name} data-reveal>
-                <h3>{offer.name}</h3>
-                <p>{offer.detail}</p>
-              </article>
-            ))}
+            {c.offers.map((offer, index) => {
+              const visual = template.visuals.offers[index % template.visuals.offers.length];
+
+              return (
+                <article key={offer.name} data-reveal>
+                  <img src={visual.src} alt={visual.alt[language]} loading="lazy" />
+                  <div>
+                    <h3>{offer.name}</h3>
+                    <p>{offer.detail}</p>
+                  </div>
+                </article>
+              );
+            })}
           </div>
         </section>
 
